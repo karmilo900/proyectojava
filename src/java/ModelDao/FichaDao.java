@@ -73,8 +73,16 @@ public class FichaDao implements MeFicha{
     }
 
     @Override
-    public boolean eliminarficha(int cod) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminarficha(int codficha) {
+        String sql="delete from ficha where codficha="+codficha;
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch(Exception e){
+            
+        }
+        return false;
     }
     
 }

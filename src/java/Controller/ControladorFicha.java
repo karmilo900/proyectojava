@@ -27,6 +27,7 @@ public class ControladorFicha extends HttpServlet {
     String editar="view/EditarPro.jsp";
     Ficha f =new Ficha();
     FichaDao fdao=new FichaDao();
+    int codficha;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,6 +67,12 @@ public class ControladorFicha extends HttpServlet {
             f.setCodaprendiz(nomApre);
             fdao.registroficha(f);
             acceso=agregarfi;
+        }
+        else if(action.equalsIgnoreCase("eliminar")){
+            codficha=Integer.parseInt(request.getParameter("codficha"));
+            f.setCodprograma(codficha);
+            fdao.eliminarficha(codficha);
+            acceso=listarfi;
         }
          RequestDispatcher view=request.getRequestDispatcher(acceso);
             view.forward(request, response);

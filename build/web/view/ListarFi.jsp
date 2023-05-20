@@ -48,8 +48,8 @@
 
 
                             <td class="text-center">
-                                <a class="btn btn-danger" href="../ControladoPrograma?accion=editar&codprograma=<%=fich.getCodFicha()%>">EDITAR</a>
-                                <a class="btn btn-warning" href="../ControladoPrograma?accion=eliminar&codprograma=<%=fich.getCodFicha()%>">ELIMINAR</a>
+                                <a class="btn btn-danger" href="../ControladorFicha?accion=editar&codficha=<%=fich.getCodFicha()%>">EDITAR</a>
+                                <a class="btn btn-warning" href="../ControladorFicha?accion=eliminar&codficha=<%=fich.getCodFicha()%>">ELIMINAR</a>
 
                             </td>
                         </tr>
