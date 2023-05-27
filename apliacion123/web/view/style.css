@@ -1,4 +1,4 @@
-#formatos {
+#contenedor {
   position: relative;
   display: flex;
   justify-content: center;
@@ -6,16 +6,50 @@
   background: #ddd;
   border-radius: 1rem;
   max-width: 60rem;
-  width: 50%;
+  width: 90%;
   margin: 3rem auto;
-  margin-top: 100px;
 }
 
+#datos {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.2rem 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input{
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+button {
+  display: inline-block;
+  width: 48%;
+  margin-right: 4%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
 button {
   background: #04a4cc;
   color: white;
   border: none;
   margin-top: 1rem;
-  width: 50%;
+  width: 100%;
 }
