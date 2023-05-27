@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2023 a las 03:45:50
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.0.25
+-- Tiempo de generación: 27-05-2023 a las 06:07:15
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,14 +36,6 @@ CREATE TABLE `aprendiz` (
   `ApellidoA` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `aprendiz`
---
-
-INSERT INTO `aprendiz` (`id`, `Docu`, `EmailA`, `TelefonoA`, `NombreA`, `ApellidoA`) VALUES
-(50, 10003444, 'ALMEJAVIEJA@GMAIL.COM', 321654, 'VIEJA', 'CACHoNDA'),
-(54, 10003444, 'camilo@gmai.ocm', 4645645, 'Camilo Juan', 'Gonzales Rojas');
-
 -- --------------------------------------------------------
 
 --
@@ -67,6 +59,15 @@ CREATE TABLE `programa` (
   `codprograma` int(11) NOT NULL,
   `nombrepro` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `programa`
+--
+
+INSERT INTO `programa` (`codprograma`, `nombrepro`) VALUES
+(1022, 'Postproduccion'),
+(7458, 'Cocinasa'),
+(654321, 'adso');
 
 --
 -- Índices para tablas volcadas
@@ -100,7 +101,7 @@ ALTER TABLE `programa`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Restricciones para tablas volcadas
@@ -110,10 +111,11 @@ ALTER TABLE `aprendiz`
 -- Filtros para la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  ADD CONSTRAINT `ficha_ibfk_1` FOREIGN KEY (`codprod`) REFERENCES `programa` (`codprograma`),
-  ADD CONSTRAINT `ficha_ibfk_2` FOREIGN KEY (`codaprendiz`) REFERENCES `aprendiz` (`id`);
+  ADD CONSTRAINT `ficha_ibfk_1` FOREIGN KEY (`codprod`) REFERENCES `programa` (`codprograma`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ficha_ibfk_2` FOREIGN KEY (`codaprendiz`) REFERENCES `aprendiz` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
