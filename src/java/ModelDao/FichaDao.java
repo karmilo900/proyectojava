@@ -1,0 +1,115 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ModelDao;
+
+import Config.Conexion;
+import Interfaz.MeFicha;
+import Model.Ficha;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+
+public class FichaDao implements MeFicha{
+    
+    Ficha fe =new Ficha();
+    Conexion co= new Conexion();
+    Connection cn;
+    PreparedStatement ps;
+    ResultSet rs;
+
+    @Override
+    public Ficha list(int codficha) {
+        String sql="Select * from ficha where codficha="+codficha;
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                fe.setCodFicha(rs.getInt("codficha"));
+                fe.setCantiAprendices(rs.getInt("cantapre"));
+                fe.setCodprograma(rs.getInt("codprod"));
+                fe.setCodaprendiz(rs.getInt("codaprendiz"));
+                
+            }
+            
+        }catch(Exception e){
+            
+        }
+        return fe;
+    }
+
+    @Override
+    public List listaFichas() {
+         ArrayList<Ficha> lista = new ArrayList<Ficha>();
+        String sql = "select * from ficha";
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Ficha fi=new Ficha();
+                fi.setCodFicha(rs.getInt("codficha"));
+                fi.setCantiAprendices(rs.getInt("cantapre"));
+                fi.setCodprograma(rs.getInt("codprod"));
+                fi.setCodaprendiz(rs.getInt("codaprendiz"));
+                
+                
+                lista.add(fi);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"No se puede consultar");
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean registroficha(Ficha fi) {
+        String sql="insert into ficha(codficha,cantapre,codprod,codaprendiz)values('"+fi.getCodFicha()+"','"+fi.getCantiAprendices()+"','"+fi.getCodprograma()+"','"+fi.getCodaprendiz()+"')";
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Ficha Registrada");
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"ficha no registrada"+e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean actualizarficha(Ficha fi) {
+        String sql="update ficha set cantapre='"+fi.getCantiAprendices()+"',codficha='"+fi.getCodFicha()+"',codaprendiz='"+fi.getCodaprendiz()+"',codprod='"+fi.getCodprograma()+"'where codficha="+fi.getCodFicha();
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Usuario pudo ser actualizado");
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Usuario no pudo ser actualizado"+e.getMessage());
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean eliminarficha(int codficha) {
+        String sql="delete from ficha where codficha="+codficha;
+        try{
+            cn=co.getConnection();
+            ps=cn.prepareStatement(sql);
+            ps.executeUpdate();
+        }catch(Exception e){
+            
+        }
+        return false;
+    }
+    
+}
